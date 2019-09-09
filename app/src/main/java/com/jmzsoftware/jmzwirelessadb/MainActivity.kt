@@ -24,10 +24,9 @@ package com.jmzsoftware.jmzwirelessadb
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import eu.chainfire.libsuperuser.Shell
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val ip: String
@@ -42,17 +41,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val textView = findViewById<TextView>(R.id.textView)
-        val adb = findViewById<Button>(R.id.button)
-        adb.setOnClickListener {
-            if (adb.text == resources.getString(R.string.disable)) {
+        button.setOnClickListener {
+            if (button.text == resources.getString(R.string.disable)) {
                 disableAdb()
                 textView.text = ""
-                adb.text = resources.getString(R.string.enable)
+                button.text = resources.getString(R.string.enable)
             } else {
                 enableAdb()
                 textView.text = resources.getString(R.string.noti, ip)
-                adb.text = resources.getString(R.string.disable)
+                button.text = resources.getString(R.string.disable)
             }
         }
     }
