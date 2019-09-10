@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Jmz Wireless ADB</string>
+    <string name="app_name">Wireless ADB</string>
     <string name="enable">Enable ADB</string>
     <string name="disable">Disable ADB</string>
     <string name="noti">Run \'adb connect %s:5555\' in terminal</string>

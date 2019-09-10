@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -11,6 +12,20 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+    }
+    if (keystorePropertiesFile.exists()) {
+        println "Found signature properties file. Build will be signed."
+        def keystoreProperties = new Properties()
+        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+        signingConfigs {
+            release {
+                storeFile rootProject.file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+        buildTypes.release.signingConfig = signingConfigs.release
     }
     buildTypes {
         release {
