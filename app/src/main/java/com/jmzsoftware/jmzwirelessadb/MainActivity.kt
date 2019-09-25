@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun disableAdb() {
-        runCommands(arrayOf("stop adbd"))
+        runCommands(arrayOf("setprop service.adb.tcp.port 0", "stop adbd"))
     }
 
     private fun runCommands(cmds: Array<String>) {
